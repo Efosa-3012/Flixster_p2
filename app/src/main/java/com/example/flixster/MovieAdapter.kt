@@ -1,12 +1,16 @@
 package com.example.flixster
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -56,7 +60,13 @@ class MovieAdapter(private val context : Context, private val movies: List<Movie
         }
 
         override fun onClick(p0: View?) {
-
+            //1. get notified of particular movie which was clicked on
+            val movie = movies[adapterPosition]
+            Toast.makeText(context, movie.title, Toast.LENGTH_SHORT).show()
+            //2. Use the intent system to navigate to the new activity
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(MOVIE_EXTRA, movie)
+            context.startActivity(intent)
         }
     }
 }
